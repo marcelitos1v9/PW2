@@ -31,15 +31,44 @@ app.get("/videos",(req, res) => {
 })
 
 app.get("/produtos/:produto?",(req, res)=>{
-    const produto = req.params.produto
-    
-    if (produto) {
-        res.send(`<h2> ${produto}</h2>`)
-    }else{
-        res.send(`<h1>Usuario por favor insira o produto</h1>`)
-    }
+    let produto = req.params.produto
+    let produtos = ['Computador', 'Celular', 'Tablet']
+    res.render("produtos",{
+        //enviando variaveis para a página
+        
+        produto : produto,
+        produtos : produtos
+    })
 })
 
+app.get("/clientes",(req, res)=>{
+    let cliente = [
+        {nome : 'Marcelo',cidade : 'Paris',cpf:'123456879'},
+        {nome : 'Marlon',cidade : 'Registro',cpf:'12345986'},
+        {nome : 'Leonardo ',cidade : 'Canabis',cpf:'123879456'},
+        {nome : 'Matheus Diegues',cidade : 'Paris',cpf:'789132456'},
+    ];
+    res.render("clientes",{
+        //enviando variaveis para a página
+        cliente : cliente
+    })
+})
+
+//rota pedidos 
+
+app.get("/pedidos",(req, res) => {
+    //array de objetos com pedidos
+    let pedido = [
+        {produto : 'Celular',preco : 12000},
+        {produto :'Computador',preco : 3000},
+        {produto : 'Tablet', preco :2000},
+        {produto : 'Notebook', preco : 3800}
+    ];
+    res.render("pedidos",{
+        //enviando array de objetos para a página
+        pedido : pedido
+    })
+})
 
 
 app.listen(8080, function(erro){
